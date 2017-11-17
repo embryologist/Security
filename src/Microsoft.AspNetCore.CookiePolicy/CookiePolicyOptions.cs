@@ -27,6 +27,17 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         public CookieSecurePolicy Secure { get; set; } = CookieSecurePolicy.None;
 
+        public CookieBuilder ConsentCookie { get; set; } = new CookieBuilder()
+        {
+            Name = ".AspNet.Consent",
+            Expiration = TimeSpan.FromDays(90),
+        };
+
+        /// <summary>
+        /// Checks if consent policies should be evaluated on this request. The default is false.
+        /// </summary>
+        public Func<HttpContext, bool> CheckConsentPolicyNeeded { get; set; }
+
         /// <summary>
         /// Called when a cookie is appended.
         /// </summary>
